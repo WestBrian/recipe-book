@@ -1,5 +1,5 @@
-import React, { FC } from 'react'
 import { Box, CircularProgress } from '@material-ui/core'
+import React, { FC } from 'react'
 
 const FullPageLoad: FC = () => {
   return (
@@ -9,6 +9,7 @@ const FullPageLoad: FC = () => {
       display={'flex'}
       alignItems={'center'}
       justifyContent={'center'}
+      component={'main'}
     >
       <CircularProgress size={60} />
     </Box>

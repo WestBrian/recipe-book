@@ -1,8 +1,13 @@
-import React, { FC } from 'react'
 import { AuthProvider } from './AuthProvider'
+import { RecipeProvider } from './RecipeProvider'
+import React, { FC } from 'react'
 
 const Providers: FC = ({ children }) => {
-  return <AuthProvider>{children}</AuthProvider>
+  return (
+    <AuthProvider>
+      <RecipeProvider>{children}</RecipeProvider>
+    </AuthProvider>
+  )
 }
 
 export default Providers

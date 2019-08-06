@@ -1,9 +1,9 @@
-import React from 'react'
-import Header from 'modules/Header'
-import { CssBaseline, Box } from '@material-ui/core'
-import AuthenticatedApp from 'modules/AuthenticatedApp'
-import UnauthenticatedApp from 'modules/UnauthenticatedApp'
+import { Box, CssBaseline } from '@material-ui/core'
 import { useAuth } from 'providers/AuthProvider'
+import AuthenticatedApp from 'modules/AuthenticatedApp'
+import Header from 'modules/Header'
+import React from 'react'
+import UnauthenticatedApp from 'modules/UnauthenticatedApp'
 
 const App: React.FC = () => {
   const { user } = useAuth()
@@ -12,7 +12,7 @@ const App: React.FC = () => {
     <>
       <CssBaseline />
       <Header />
-      <Box padding={2}>
+      <Box paddingTop={'64px'} component={'main'}>
         {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
       </Box>
     </>
