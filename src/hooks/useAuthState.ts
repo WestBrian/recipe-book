@@ -1,24 +1,24 @@
-import { useState, useEffect } from 'react'
-import { User } from 'firebase'
-import { auth } from 'firebase-config'
-import { setSession, removeSession } from 'utils/auth-checker'
+import { User } from 'providers/AuthProvider/types'
+import { auth, firestore } from 'firebase-config'
+import { useEffect, useState } from 'react'
 
 export const useAuthState = () => {
   const [user, setUser] = useState<User | undefined>(undefined)
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
+    const unsubscribe = auth.onAuthStateChanged(async user => {
       if (user) {
-        setSession()
-        setUser(user)
+        console.log('fetching user')
+        const userDoc = await firestore.doc(`users/${user.uid}`).get()
+        const userData = await userDoc.data()
+        setUser(userData as User)
       } else {
-        removeSession()
         setUser(undefined)
       }
     })
 
     return () => unsubscribe()
-  })
+  }, [])
 
   return { user }
 }

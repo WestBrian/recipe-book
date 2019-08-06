@@ -1,0 +1,24 @@
+{
+  "extends": [
+    "react-app",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "prettier/@typescript-eslint"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "sort-imports-es6-autofix", "react-hooks"],
+  "rules": {
+    "no-console": "warn",
+    "sort-imports-es6-autofix/sort-imports-es6": [1],
+    "@typescript-eslint/explicit-function-return-type": [
+      0,
+      {
+        "allowExpressions": true,
+        "allowTypedFunctionExpressions": true
+      }
+    ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  }
+}

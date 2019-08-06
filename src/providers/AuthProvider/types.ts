@@ -1,4 +1,10 @@
-import { User } from 'firebase'
+import { Recipe } from 'providers/RecipeProvider/types'
+
+export interface User {
+  uid: string
+  email?: string
+  photoURL?: string
+}
 
 export interface AuthState {
   user?: User

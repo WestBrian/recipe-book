@@ -1,12 +1,29 @@
-import React, { FC } from 'react'
-import { AppBar, Toolbar, Typography, Button, Grid } from '@material-ui/core'
+import {
+  AppBar,
+  Button,
+  Grid,
+  Toolbar,
+  Typography,
+  createStyles,
+  makeStyles,
+} from '@material-ui/core'
 import { useAuth } from 'providers/AuthProvider'
+import React, { FC } from 'react'
+
+const useStyles = makeStyles(theme =>
+  createStyles({
+    root: {
+      zIndex: theme.zIndex.drawer + 1,
+    },
+  })
+)
 
 const Header: FC = () => {
+  const classes = useStyles()
   const { user, loginWithGoogle, logout } = useAuth()
 
   return (
-    <AppBar position={'static'} color={'primary'}>
+    <AppBar position={'fixed'} color={'primary'} className={classes.root}>
       <Toolbar>
         <Grid container alignItems={'center'} justify={'space-between'}>
           <Typography variant={'h6'} color={'inherit'}>

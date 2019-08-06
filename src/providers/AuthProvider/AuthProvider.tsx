@@ -1,14 +1,30 @@
-import React, { FC, createContext, useContext } from 'react'
-import { AuthState } from './types'
-import { auth, GoogleProvider } from 'firebase-config'
-import { useAuthState } from 'hooks/useAuthState'
+import { AuthState, User } from './types'
+import { GoogleProvider, auth, firestore } from 'firebase-config'
 import { hasPreviousSession } from 'utils/auth-checker'
+import { useAuthState } from 'hooks/useAuthState'
 import FullPageLoad from 'components/FullPageLoad'
+import React, { FC, createContext, useContext } from 'react'
 
 const AuthContext = createContext<AuthState>({
   loginWithGoogle: () => {},
   logout: () => {},
 })
+
+const loginWithGoogle = () =>
+  auth.signInWithPopup(GoogleProvider).then(async ({ user }) => {
+    if (user) {
+      const userRef = firestore.doc(`users/${user.uid}`)
+      const currentUser = await userRef.get()
+      if (!currentUser.exists) {
+        const newUser: User = {
+          uid: user.uid,
+          email: user.email || undefined,
+          photoURL: user.photoURL || undefined,
+        }
+        await userRef.set(newUser)
+      }
+    }
+  })
 
 const AuthProvider: FC = ({ children }) => {
   const { user } = useAuthState()
@@ -21,7 +37,7 @@ const AuthProvider: FC = ({ children }) => {
     <AuthContext.Provider
       value={{
         user,
-        loginWithGoogle: () => auth.signInWithPopup(GoogleProvider),
+        loginWithGoogle,
         logout: () => auth.signOut(),
       }}
     >
