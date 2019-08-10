@@ -1,7 +1,7 @@
 import { AuthState, User } from './types'
 import { GoogleProvider, auth, firestore } from 'firebase-config'
 import { hasPreviousSession } from 'utils/auth-checker'
-import { useAuthState } from 'hooks/useAuthState'
+import { useAuthState, useUser } from 'hooks/useAuthState'
 import FullPageLoad from 'components/FullPageLoad'
 import React, { FC, createContext, useContext } from 'react'
 
@@ -27,7 +27,8 @@ const loginWithGoogle = () =>
   })
 
 const AuthProvider: FC = ({ children }) => {
-  const { user } = useAuthState()
+  const { user: firebaseUser } = useAuthState()
+  const { user } = useUser(firebaseUser)
 
   if (!user && hasPreviousSession()) {
     return <FullPageLoad />
