@@ -11,7 +11,6 @@ import {
 import { Link } from '@reach/router'
 import { Recipe } from 'providers/RecipeProvider/types'
 import { Timer } from '@material-ui/icons'
-import { determineProtein } from './helpers'
 import React, { FC } from 'react'
 
 const useStyles = makeStyles(theme =>
