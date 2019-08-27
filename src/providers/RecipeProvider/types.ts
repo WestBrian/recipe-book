@@ -18,6 +18,7 @@ export interface Recipe {
   ingredients: Ingredient[]
   directions: string[]
   meta: Meta
+  protein?: string
 }
 
 export interface RecipeState {

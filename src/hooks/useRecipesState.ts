@@ -17,8 +17,9 @@ export const useRecipesState = (user?: User) => {
     if (user) {
       console.log('watching user recipes')
       firestore
+        .collection('users')
+        .doc(user.uid)
         .collection('recipes')
-        .where('users', 'array-contains', user.uid)
         .onSnapshot(async snapshot => {
           const newRecipes: Recipe[] = []
           await forEach(snapshot, async doc => {

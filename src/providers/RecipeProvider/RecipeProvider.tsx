@@ -1,5 +1,6 @@
-import { FieldValue, firestore } from 'firebase-config'
 import { RecipeState } from './types'
+import { determineProtein } from './helpers'
+import { firestore } from 'firebase-config'
 import { useAuth } from 'providers/AuthProvider'
 import { useRecipesState } from 'hooks/useRecipesState'
 import React, { FC, createContext, useContext } from 'react'
@@ -15,30 +16,25 @@ const RecipeProvider: FC = ({ children }) => {
   const { recipes } = useRecipesState(user)
 
   const addRecipe = async (url: string) => {
-    if (!url) {
+    if (!url || !user) {
       return
     }
 
-    const recipeRef = firestore.collection('recipes')
+    const recipeRef = firestore
+      .collection('users')
+      .doc(user.uid)
+      .collection('recipes')
 
     // Check if the recipe exists
     const snapshot = await recipeRef.where('url', '==', url).get()
-
-    let docRef: firebase.firestore.DocumentReference
 
     // If the recipe does not exist, create it
     if (snapshot.size === 0) {
       const recipe = await fetch(`${config.api.url}?q=${url}`).then(res =>
         res.json()
       )
-      docRef = await recipeRef.add({ ...recipe, users: [] })
-    } else {
-      docRef = snapshot.docs[0].ref
-    }
-
-    // Add the user id to the recipes user array
-    if (user && docRef) {
-      docRef.update({ users: FieldValue.arrayUnion(user.uid) })
+      const protein = determineProtein(recipe)
+      await recipeRef.add({ ...recipe, protein })
     }
   }
 

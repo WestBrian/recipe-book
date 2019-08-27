@@ -17,7 +17,7 @@ import RecipeMeta from 'components/RecipeMeta'
 
 const RecipeDetails: FC<RouteComponentProps<{ id: string }>> = ({ id }) => {
   const { recipes } = useRecipes()
-  const [tab, setTab] = useState<number>(1)
+  const [tab, setTab] = useState<number>(0)
   const recipe = recipes.find(r => r.id === id)
 
   if (!recipe) {
@@ -61,12 +61,6 @@ const RecipeDetails: FC<RouteComponentProps<{ id: string }>> = ({ id }) => {
             <Row>
               <Divider />
             </Row>
-            {/* <Row>
-              <Tabs value={tab} onChange={(_, newTab) => setTab(newTab)}>
-                <Tab label={'Ingredient'} />
-                <Tab label={'Directions'} />
-              </Tabs>
-            </Row> */}
             <Row>
               <Paper>
                 <Tabs value={tab} onChange={(_, newTab) => setTab(newTab)}>
