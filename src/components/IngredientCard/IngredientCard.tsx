@@ -1,13 +1,17 @@
-import { Box, Typography, createStyles, makeStyles } from '@material-ui/core'
-import { Column, Container, Row } from 'components/Layout'
+import {
+  Grid,
+  ListItem,
+  Typography,
+  createStyles,
+  makeStyles,
+} from '@material-ui/core'
 import { Ingredient } from 'providers/RecipeProvider/types'
 import React, { FC } from 'react'
 
 const useStyles = makeStyles(theme =>
   createStyles({
     measurement: {
-      backgroundColor: theme.palette.secondary.main,
-      color: '#ffffff',
+      color: theme.palette.secondary.main,
     },
   })
 )
@@ -18,24 +22,21 @@ interface IngredientProps {
 
 const IngredientCard: FC<IngredientProps> = ({ ingredient }) => {
   const classes = useStyles()
+  const { measurement, name } = ingredient
 
   return (
-    <Box padding={1}>
-      <Container>
-        <Row>
-          <Column className={classes.measurement}>
-            <Typography variant={'button'} color={'inherit'}>
-              <strong>
-                {ingredient.measurement ? ingredient.measurement : '?'}
-              </strong>
-            </Typography>
-          </Column>
-          <Column xs>
-            <Typography variant={'button'}>{ingredient.name}</Typography>
-          </Column>
-        </Row>
-      </Container>
-    </Box>
+    <ListItem divider>
+      <Grid container>
+        <Grid item xs={2} sm={1}>
+          <Typography variant={'button'} className={classes.measurement}>
+            {measurement}
+          </Typography>
+        </Grid>
+        <Grid item xs>
+          <Typography variant={'body1'}>{name}</Typography>
+        </Grid>
+      </Grid>
+    </ListItem>
   )
 }
 
