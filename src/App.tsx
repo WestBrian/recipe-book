@@ -1,4 +1,4 @@
-import { Box, CssBaseline } from '@material-ui/core'
+import { Box, CssBaseline, Toolbar } from '@material-ui/core'
 import { useAuth } from 'providers/AuthProvider'
 import AuthenticatedApp from 'modules/AuthenticatedApp'
 import Header from 'modules/Header'
@@ -12,7 +12,8 @@ const App: React.FC = () => {
     <>
       <CssBaseline />
       <Header />
-      <Box paddingTop={'64px'} component={'main'}>
+      <Box component={'main'}>
+        <Toolbar />
         {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
       </Box>
     </>
