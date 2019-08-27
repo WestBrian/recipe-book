@@ -11,7 +11,9 @@ import {
 import { Link } from '@reach/router'
 import { Recipe } from 'providers/RecipeProvider/types'
 import { Timer } from '@material-ui/icons'
+import { secondsToHms } from 'utils/formatters'
 import React, { FC } from 'react'
+import capitalize from 'lodash/capitalize'
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -43,14 +45,26 @@ const RecipeCard: FC<RecipeCardProps> = ({ recipe }) => {
         <CardActionArea>
           <CardMedia image={recipe.pictureUrl} className={classes.media} />
           <CardContent>
-            <Grid container alignItems={'center'} justify={'space-between'}>
+            <Typography variant={'body1'} component={'h2'} gutterBottom>
+              {recipe.title}
+            </Typography>
+            <Grid container spacing={2} alignItems={'center'}>
               <Grid item>
-                <Timer />
+                <Typography variant={'caption'}>
+                  {recipe.protein ? capitalize(recipe.protein) : 'No protein'}
+                </Typography>
               </Grid>
               <Grid item>
-                <Typography variant={'body1'} component={'h2'} gutterBottom>
-                  {recipe.title}
-                </Typography>
+                <Grid container spacing={1} alignItems={'center'}>
+                  <Grid item>
+                    <Timer fontSize={'small'} color={'secondary'} />
+                  </Grid>
+                  <Grid item>
+                    <Typography variant={'caption'}>
+                      {secondsToHms(recipe.meta.totalTime)}
+                    </Typography>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </CardContent>
