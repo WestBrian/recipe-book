@@ -1,5 +1,6 @@
 import {
   Drawer,
+  Hidden,
   List,
   ListItem,
   ListItemIcon,
@@ -10,12 +11,15 @@ import {
 import { DrawerItems } from './types'
 import { Link } from '@reach/router'
 import { Save } from '@material-ui/icons'
-import React, { FC } from 'react'
+import { useMenuState } from 'providers/MenuProvider'
+import React, { FC, createContext } from 'react'
 import ToolbarSpacer from 'components/ToolbarSpacer'
 
 const DRAWER_WIDTH = 230
 
-const useStyles = makeStyles(theme =>
+export const DrawerContext = createContext<boolean>(false)
+
+const useStyles = makeStyles(() =>
   createStyles({
     drawer: {
       width: DRAWER_WIDTH,
@@ -35,18 +39,9 @@ const items: DrawerItems[] = [
   },
 ]
 
-const DashboardDrawer: FC = () => {
-  const classes = useStyles()
-
+const Menu: FC = () => {
   return (
-    <Drawer
-      variant={'permanent'}
-      open
-      className={classes.drawer}
-      classes={{
-        paper: classes.drawerPaper,
-      }}
-    >
+    <>
       <ToolbarSpacer />
       <List>
         {items.map(({ text, link, icon: Icon }) => (
@@ -60,7 +55,42 @@ const DashboardDrawer: FC = () => {
           </ListItem>
         ))}
       </List>
-    </Drawer>
+    </>
+  )
+}
+
+const DashboardDrawer: FC = () => {
+  const classes = useStyles()
+  const { open, setOpen } = useMenuState()
+
+  return (
+    <nav>
+      <Hidden mdUp>
+        <Drawer
+          variant={'temporary'}
+          open={open}
+          onClose={() => setOpen(false)}
+          className={classes.drawer}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+        >
+          <Menu />
+        </Drawer>
+      </Hidden>
+      <Hidden smDown>
+        <Drawer
+          variant={'permanent'}
+          open
+          className={classes.drawer}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+        >
+          <Menu />
+        </Drawer>
+      </Hidden>
+    </nav>
   )
 }
 

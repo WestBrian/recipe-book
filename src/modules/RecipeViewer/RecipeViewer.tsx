@@ -12,7 +12,7 @@ const RecipeViewer: FC<RouteComponentProps> = () => {
     <>
       <Grid container spacing={2}>
         {recipes.map((recipe, i) => (
-          <Grid item key={`recipe-card-${i}`} sm={6} md={4}>
+          <Grid item key={`recipe-card-${i}`} xs={12} sm={6} md={4}>
             <RecipeCard recipe={recipe} />
           </Grid>
         ))}
