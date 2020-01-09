@@ -67,8 +67,13 @@ const RecipeCard: FC<RecipeCardProps> = ({ recipe }) => {
                 <Typography variant={'body2'} color={'inherit'}>
                   Dinner
                 </Typography>
-                <Typography variant={'body1'} color={'inherit'} gutterBottom>
-                  {recipe.title}
+                <Typography
+                  variant={'body1'}
+                  color={'inherit'}
+                  gutterBottom
+                  noWrap
+                >
+                  {recipe.title || 'No title'}
                 </Typography>
                 <Divider className={classes.divider} />
                 <Grid container spacing={2} alignItems={'center'}>
