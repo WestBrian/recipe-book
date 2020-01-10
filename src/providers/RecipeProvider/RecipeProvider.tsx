@@ -33,7 +33,7 @@ const RecipeProvider: FC = ({ children }) => {
       const recipe = await fetch(`${config.api.url}?q=${url}`).then(res =>
         res.json()
       )
-      const protein = determineProtein(recipe)
+      const protein = determineProtein(recipe) || null
       await recipeRef.add({ ...recipe, protein })
     }
   }
