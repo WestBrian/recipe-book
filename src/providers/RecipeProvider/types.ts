@@ -1,3 +1,5 @@
+import { Protein } from './helpers'
+
 export interface Meta {
   yield: number
   prepTime: number
@@ -18,7 +20,7 @@ export interface Recipe {
   ingredients: Ingredient[]
   directions: string[]
   meta: Meta
-  protein?: string
+  protein?: Protein
 }
 
 export interface RecipeState {
