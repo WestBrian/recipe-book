@@ -7,7 +7,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --fix --ext \".js,.jsx,.ts,.tsx\" \"src/**/*\"",
+    "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx src",
     "deploy": "yarn run build && firebase deploy",
     "deploy:hosting": "yarn run build && firebase deploy --only hosting"
   },

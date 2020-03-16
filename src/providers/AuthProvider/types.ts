@@ -1,5 +1,3 @@
-import { Recipe } from 'providers/RecipeProvider/types'
-
 export interface User {
   uid: string
   email?: string
