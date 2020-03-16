@@ -1,5 +1,6 @@
 import { Add } from '@material-ui/icons'
 import { Fab, createStyles, makeStyles } from '@material-ui/core'
+import { navigate } from '@reach/router'
 import AddModal from './AddModal'
 import React, { FC, useState } from 'react'
 
@@ -34,12 +35,13 @@ const AddRecipeButton: FC<AddRecipeButtonProps> = ({ onSubmit }) => {
   const [open, setOpen] = useState(false)
 
   const handleCreateAutomatically = (value: string) => {
-    onSubmit(value)
     setOpen(false)
+    onSubmit(value)
   }
 
   const handleCreateManually = () => {
     setOpen(false)
+    navigate('/create')
   }
 
   return (

@@ -19,7 +19,7 @@ const AuthenticatedApp: FC = () => {
       <nav>
         <DashboardDrawer />
       </nav>
-      <Box padding={2} className={classes.main}>
+      <Box padding={4} className={classes.main}>
         <Routes />
       </Box>
     </Box>

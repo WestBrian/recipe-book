@@ -11,9 +11,6 @@
     "deploy": "yarn run build && firebase deploy",
     "deploy:hosting": "yarn run build && firebase deploy --only hosting"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -24,6 +21,9 @@
       "prettier --single-quote --write",
       "git add"
     ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "browserslist": {
     "production": [
@@ -44,34 +44,34 @@
     "@material-ui/core": "^4.3.0",
     "@material-ui/icons": "^4.2.1",
     "@reach/router": "^1.2.1",
-    "firebase": "^6.3.3",
+    "@xstate/react": "^0.8.1",
+    "firebase": "^7.7.0",
     "formik": "^2.1.1",
     "framer-motion": "^1.7.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-input-mask": "^2.0.4",
+    "react-scripts": "3.3.0",
+    "xstate": "^4.7.6"
   },
   "devDependencies": {
-    "@types/jest": "24.0.16",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^24.0.0",
     "@types/lodash": "^4.14.136",
     "@types/moment": "^2.13.0",
-    "@types/node": "12.6.8",
+    "@types/node": "^12.0.0",
     "@types/reach__router": "^1.2.4",
-    "@types/react": "16.8.24",
+    "@types/react": "^16.9.17",
     "@types/react-dom": "16.8.5",
+    "@types/react-input-mask": "^2.0.5",
     "@types/webpack-env": "^1.14.0",
-    "@typescript-eslint/eslint-plugin": "^1.13.0",
-    "@typescript-eslint/parser": "^1.13.0",
-    "eslint": "^5.16.0",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-config-react-app": "^4.0.1",
-    "eslint-plugin-react-hooks": "^1.6.1",
-    "eslint-plugin-sort-imports-es6-autofix": "^0.4.0",
     "husky": "^3.0.2",
     "lint-staged": "^9.2.1",
     "prettier": "^1.18.2",
-    "typescript": "3.5.3"
+    "typescript": "~3.7.2"
   }
 }
